@@ -13,10 +13,12 @@ import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
+import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
+import com.taotao.pojo.TbItemParamItem;
 import com.taotao.service.ItemService;
 /**
  * 商品管理Service
@@ -30,6 +32,8 @@ public class ItemServiceImpl implements ItemService {
 	private TbItemMapper itemMapper;
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
+	@Autowired
+	private TbItemParamItemMapper itemParamItemMapper;
 	
 	@Override
 	public TbItem getItemById(long itemId) {
@@ -78,6 +82,12 @@ public class ItemServiceImpl implements ItemService {
 		itemMapper.insert(item);
 		//添加商品描述信息
 		TaotaoResult result = insertItemDesc(itemId, desc);
+		//添加规格参数 6.3
+		
+		
+		
+		
+		
 		if(result.getStatus() != 200){
 			throw new Exception();
 		}
@@ -100,6 +110,25 @@ public class ItemServiceImpl implements ItemService {
 		itemDescMapper.insert(itemDesc);
 		return TaotaoResult.ok();
 		
+	}
+	
+	/**
+	 * 添加规格参数
+	 * @param itemId
+	 * @param itemParam
+	 * @return
+	 */
+	private TaotaoResult insertItemParamItem(Long itemId, String itemParam) {
+		//创建一个pojo
+		TbItemParamItem itemParamItem = new TbItemParamItem();
+		itemParamItem.setItemId(itemId);
+		itemParamItem.setParamData(itemParam);
+		itemParamItem.setCreated(new Date());
+		itemParamItem.setUpdated(new Date());
+		//向表中插入数据
+		itemParamItemMapper.insert(itemParamItem);
+		
+		return TaotaoResult.ok();
 	}
 
 }
