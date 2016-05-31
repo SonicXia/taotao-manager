@@ -50,7 +50,10 @@ public class ItemServiceImpl implements ItemService {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * 商品列表查询
+	 */
 	@Override
 	public EUDataGridResult getItemList(int page, int rows) {
 		//查询商品列表
@@ -69,29 +72,27 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public TaotaoResult createItem(TbItem item, String desc) throws Exception {
-		//item字段补全
-		//生成itemId
+	public TaotaoResult createItem(TbItem item, String desc, String itemParam) throws Exception {
+		//item补全
+		//生成商品ID
 		Long itemId = IDUtils.genItemId();
 		item.setId(itemId);
 		// '商品状态，1-正常，2-下架，3-删除',
 		item.setStatus((byte) 1);
 		item.setCreated(new Date());
 		item.setUpdated(new Date());
-		//把数据插入到商品表
+		//插入到数据库
 		itemMapper.insert(item);
 		//添加商品描述信息
 		TaotaoResult result = insertItemDesc(itemId, desc);
-		//添加规格参数 6.3
-		
-		
-		
-		
-		
-		if(result.getStatus() != 200){
+		if (result.getStatus() != 200) {
 			throw new Exception();
 		}
-		
+		//添加规格参数
+		result = insertItemParamItem(itemId, itemParam);
+		if (result.getStatus() != 200) {
+			throw new Exception();
+		}
 		return TaotaoResult.ok();
 	}
 	
@@ -129,6 +130,7 @@ public class ItemServiceImpl implements ItemService {
 		itemParamItemMapper.insert(itemParamItem);
 		
 		return TaotaoResult.ok();
+
 	}
 
 }
