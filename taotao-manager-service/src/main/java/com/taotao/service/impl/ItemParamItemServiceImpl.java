@@ -24,7 +24,7 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 	private TbItemParamItemMapper itemParamItemMapper;
 	
 	@Override
-	public String getItemParamByItemId(Long itemId) {
+	public String getItemParamByItemId(long itemId) {
 		//根据商品Id查询规格参数
 		TbItemParamItemExample example = new TbItemParamItemExample();
 		Criteria criteria = example.createCriteria();

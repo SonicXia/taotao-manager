@@ -24,7 +24,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 	private TbItemCatMapper itemCatMapper;
 
 	@Override
-	public List<EUTreeNode> getItemCatList(Long parentId) {
+	public List<EUTreeNode> getItemCatList(long parentId) {
 		TbItemCatExample example = new TbItemCatExample();
 		//设置查询条件
 		Criteria criteria = example.createCriteria();

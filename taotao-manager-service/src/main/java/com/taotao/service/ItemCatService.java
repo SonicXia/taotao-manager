@@ -6,5 +6,5 @@ import com.taotao.common.pojo.EUTreeNode;
 
 public interface ItemCatService {
 	
-	List<EUTreeNode> getItemCatList(Long parentId);
+	List<EUTreeNode> getItemCatList(long parentId);
 }
