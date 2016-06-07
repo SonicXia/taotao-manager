@@ -66,7 +66,8 @@ var contentEditPage = {
 			}
 			contentEditEditor.sync();
 			
-			$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
+			//$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
+			$.post("/content/edit",$("#contentEditForm").serialize(), function(data){
 				if(data.status == 200){
 					$.messager.alert('提示','新增内容成功!');
 					$("#contentList").datagrid("reload");
@@ -75,7 +76,10 @@ var contentEditPage = {
 			});
 		},
 		clearForm : function(){
+			//$('#contentEditForm').form('reset');
+			$('#contentEditForm')[0].reset();
 			
+			contentAddEditor.html('');
 		}
 };
 

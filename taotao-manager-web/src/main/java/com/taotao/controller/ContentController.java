@@ -30,4 +30,23 @@ public class ContentController {
 		TaotaoResult result = contentService.insertContent(content);
 		return result;
 	}
+	
+	@RequestMapping("/edit")
+	@ResponseBody
+	public TaotaoResult editContent(TbContent content){
+		TaotaoResult result = contentService.editContent(content);
+		return result;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public TaotaoResult deleteContent(int[] ids){
+		long[] idsl = new long[ids.length];
+		for(int i = 0; i < ids.length; i++){
+			idsl[i] = (long)ids[i];
+		}
+		TaotaoResult result = contentService.deleteContent(idsl);
+		return result;
+		
+	}
 }

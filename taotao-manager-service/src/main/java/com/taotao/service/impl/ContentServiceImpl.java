@@ -1,5 +1,6 @@
 package com.taotao.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,5 +48,22 @@ public class ContentServiceImpl implements ContentService {
 		return TaotaoResult.ok(content);
 	}
 
+	@Override
+	public TaotaoResult editContent(TbContent content) {
+		TbContent content2 = contentMapper.selectByPrimaryKey(content.getId());
+		content.setCreated(content2.getCreated());
+		content.setUpdated(new Date());
+		contentMapper.updateByPrimaryKey(content);
+		return TaotaoResult.ok(content);
+	}
+
+	@Override
+	public TaotaoResult deleteContent(long[] ids) {
+		for(long id : ids){
+			contentMapper.deleteByPrimaryKey(id);
+		}
+
+		return TaotaoResult.ok();
+	}
 
 }

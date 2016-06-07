@@ -7,4 +7,6 @@ import com.taotao.pojo.TbContent;
 public interface ContentService {
 	EUDataGridResult getContentList(int page, int rows, Long categoryId);
 	TaotaoResult insertContent(TbContent content);
+	TaotaoResult editContent(TbContent content);
+	TaotaoResult deleteContent(long[] ids);
 }

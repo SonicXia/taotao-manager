@@ -76,6 +76,8 @@
 			},
 			clearForm : function(){
 				$('#contentAddForm').form('reset');
+				//$('#contentAddForm')[0].reset();
+				
 				contentAddEditor.html('');
 			}
 	};
